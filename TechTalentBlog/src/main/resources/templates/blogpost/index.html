@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org ">
+<head>
+    <meta charset="UTF-8">
+    <title>Mom's Who Code Blog</title>
+</head>
+<body>
+<h1>Welcome to Our Blog Site!</h1>
+<h3>Check Out Our Blogs!</h3>
+<form action="#" th:action="@{/}" th:object="${blogPost}">
+    <table>
+        <tr>
+            <td>Title</td>
+            <td><input type="text" th:field="*{title}" /></td>
+        </tr>
+        <tr>
+            <td>Author</td>
+            <td><input type="text" th:field="*{author}" /></td>
+        </tr>
+        <tr>
+            <td>Blog Entry</td>
+            <td><input type="text" th:field="*{blogEntry}" /></td>
+        </tr>
+    </table>
+    <tr>
+        <button type="submit">Submit Your Post</button>
+    </tr>
+</form>
+</body>
+</html>
