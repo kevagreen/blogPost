@@ -12,27 +12,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class BlogPostController {
     //allows dependency injection
     //dependency injection gives objects the dependencies they need
+    //@autowired is optional
     @Autowired
     private BlogPostRepository blogPostRepository;
 
     public BlogPostController(BlogPostRepository blogPostRepository) {
         this.blogPostRepository = blogPostRepository;
     }
-
+    private BlogPost blogPost;
     @GetMapping(value="/")
     public String index(BlogPost blogPost){
         //output generated via template
         //show desired data
         return "blogpost/index";
     }
+    //mapping post requests
     @PostMapping(value="/")
     public String addNewBlogPost(BlogPost blogPost, Model model){
-
-        blogPostRepository.save(new BlogPost(
-                blogPost.getTitle(),
-                blogPost.getAuthor(),
-                blogPost.getBlogEntry()
-        ));
+        //blogPost is our object we're getting from thymeleaf form
+        blogPostRepository.save(blogPost);
         model.addAttribute("title", blogPost.getTitle());
         model.addAttribute("author", blogPost.getAuthor());
         model.addAttribute("blogEntry", blogPost.getBlogEntry());
