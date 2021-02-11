@@ -53,12 +53,9 @@ public class BlogPost {
 
     @Override
     public String toString() {
-        return "BlogPost{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", author='" + author + '\'' +
-                ", blogEntry='" + blogEntry + '\'' +
-                '}';
+        return " Title: " + title + "\n" +
+                " Author: " + author + "\n" +
+                " Entry: " + blogEntry + "\n";
     }
     //override hashcode and equals as well.... .equals() and .hashcode()
 

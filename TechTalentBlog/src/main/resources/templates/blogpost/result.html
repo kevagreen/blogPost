@@ -2,14 +2,17 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
+    <link href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <title>Blog</title>
 </head>
 <body>
-<h3>Blog Post Form</h3>
-<p>Thank you for your submission</p>
-<h4>Blog Post:</h4>
+<h3>It's Posted!</h3>
+<p>Thank you for your 2 cents!!!</p>
+<h4>Your Post:</h4>
 <p th:text="${title}"></p>
 <p th:text="${author}"></p>
 <p th:text="${blogPost}"></p>
 </body>
+<script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="webjars/jquery/1.9.1/jquery.min.js"></script>
 </html>

@@ -3,11 +3,37 @@
       xsi:schemaLocation="http://www.thymeleaf.org ">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/stylesheet.css"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap" rel="stylesheet">
+    <link href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <title>Mom's Who Code Blog</title>
 </head>
 <body>
+<div id="title">
 <h1>Welcome to Mom's Who Code!</h1>
-<h3>Check Out Our Blogs!</h3>
+<h4>Check Out Our Blogs!</h4>
+    <div class="row">
+        <div th:each="blog:${posts}">
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <p th:text="${blog.title}"/>
+                    </div>
+                    <div class="panel-body">
+                        <p th:text="${blog.author}"/>
+                        <p th:text="${blog.blogEntry}" />
+                    </div>
+                    <div class="panel-footer">
+                        <!-- Link to Update -->
+                        <!-- Link to Show  -->
+                        <!--  Link to Destroy -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <form action="#" th:action="@{/}" th:object="${blogPost}" method="post">
     <table>
         <tr>
@@ -27,5 +53,7 @@
         <button type="submit">Submit Your Post</button>
     </tr>
 </form>
+<script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="webjars/jquery/1.9.1/jquery.min.js"></script>
 </body>
 </html>

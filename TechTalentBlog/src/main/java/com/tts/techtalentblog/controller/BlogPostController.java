@@ -8,6 +8,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
+//giant router page similar to react
 @Controller
 public class BlogPostController {
     //allows dependency injection
@@ -15,17 +20,16 @@ public class BlogPostController {
     //@autowired is optional
     @Autowired
     private BlogPostRepository blogPostRepository;
+    private static List<BlogPost> posts = new ArrayList<>();
 
-    public BlogPostController(BlogPostRepository blogPostRepository) {
-        this.blogPostRepository = blogPostRepository;
-    }
-    private BlogPost blogPost;
     @GetMapping(value="/")
-    public String index(BlogPost blogPost){
+    public String index(BlogPost blogPost, Model model){
         //output generated via template
         //show desired data
+        model.addAttribute("post ", posts);
         return "blogpost/index";
     }
+    private BlogPost blogPost;
     //mapping post requests
     @PostMapping(value="/")
     public String addNewBlogPost(BlogPost blogPost, Model model){
