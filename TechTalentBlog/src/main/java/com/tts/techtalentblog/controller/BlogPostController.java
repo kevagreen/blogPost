@@ -31,7 +31,7 @@ public class BlogPostController {
     }
     private BlogPost blogPost;
     //mapping post requests
-    @PostMapping(value="/")
+    @PostMapping(value="/blogpost")
     public String addNewBlogPost(BlogPost blogPost, Model model){
         //blogPost is our object we're getting from thymeleaf form
         blogPostRepository.save(blogPost);
@@ -39,5 +39,9 @@ public class BlogPostController {
         model.addAttribute("author", blogPost.getAuthor());
         model.addAttribute("blogEntry", blogPost.getBlogEntry());
         return "blogpost/result";
+    }
+    @GetMapping(value = "/blogpost/new")
+    public String newBlog(BlogPost blogPost){
+        return "blogpost/createpost";
     }
 }
