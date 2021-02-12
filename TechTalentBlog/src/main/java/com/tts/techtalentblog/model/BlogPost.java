@@ -27,6 +27,10 @@ public class BlogPost {
     public BlogPost() {
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -53,10 +57,12 @@ public class BlogPost {
 
     @Override
     public String toString() {
-        return " Title: " + title + "\n" +
-                " Author: " + author + "\n" +
+        return " Title: " +  title + '\r'+'\n' +
+                " Author: " + author + '\n' +
                 " Entry: " + blogEntry + "\n";
     }
+
+
     //override hashcode and equals as well.... .equals() and .hashcode()
 
 }

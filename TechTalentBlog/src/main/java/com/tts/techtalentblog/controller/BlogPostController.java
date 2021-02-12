@@ -5,8 +5,7 @@ import com.tts.techtalentblog.repository.BlogPostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,17 +21,19 @@ public class BlogPostController {
     private BlogPostRepository blogPostRepository;
     private static List<BlogPost> posts = new ArrayList<>();
 
-    @GetMapping(value="/")
-    public String index(BlogPost blogPost, Model model){
+    @GetMapping(value = "/")
+    public String index(BlogPost blogPost, Model model) {
         //output generated via template
         //show desired data
         model.addAttribute("post ", posts);
         return "blogpost/index";
     }
+
     private BlogPost blogPost;
+
     //mapping post requests
-    @PostMapping(value="/blogpost")
-    public String addNewBlogPost(BlogPost blogPost, Model model){
+    @PostMapping(value = "/blogpost")
+    public String addNewBlogPost(BlogPost blogPost, Model model) {
         //blogPost is our object we're getting from thymeleaf form
         blogPostRepository.save(blogPost);
         model.addAttribute("title", blogPost.getTitle());
@@ -40,8 +41,16 @@ public class BlogPostController {
         model.addAttribute("blogEntry", blogPost.getBlogEntry());
         return "blogpost/result";
     }
+
     @GetMapping(value = "/blogpost/new")
-    public String newBlog(BlogPost blogPost){
+    public String newBlog(BlogPost blogPost) {
         return "blogpost/createpost";
     }
+
+    @RequestMapping(value = "/blogpost/{Id}", method = RequestMethod.DELETE)
+    public String deletePostWithId(@PathVariable Long id, BlogPost blogPost) {
+        blogPostRepository.deleteById(blogPost.getId());
+        return "blogpost/index";
+    }
 }
+
