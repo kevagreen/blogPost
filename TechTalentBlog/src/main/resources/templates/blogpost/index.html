@@ -29,6 +29,13 @@
                             <!-- Link to Update -->
                             <!-- Link to Show  -->
                             <!--  Link to Destroy -->
+                            <form action="#" th:action="@{'/blogpost/{id}'(id=${blogPost.id})}" th:method="delete"
+                                  class="form-horizontal">
+                                <div class ="form-group">
+                                    <input type="hidden" name="_method" value="delete"/>
+                                    <button type="submit" class="btn btn-danger btn-block" th:text="Delete">Changed Your Mind? Delete Here</button>
+                                </div>
+                            </form>
 
                         </div>
                     </div>
