@@ -2,6 +2,7 @@ package com.tts.techtalentblog.controller;
 
 import com.tts.techtalentblog.model.BlogPost;
 import com.tts.techtalentblog.repository.BlogPostRepository;
+import com.tts.techtalentblog.service.BlogPostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,12 +15,21 @@ import java.util.List;
 //giant router page similar to react
 @Controller
 public class BlogPostController {
+    private BlogPostService blogPostService;
+    private BlogPostRepository repository;
+    private static List<BlogPost> posts = new ArrayList<>();
     //allows dependency injection
     //dependency injection gives objects the dependencies they need
     //@autowired is optional
     @Autowired
-    private BlogPostRepository blogPostRepository;
-    private static List<BlogPost> posts = new ArrayList<>();
+   // private BlogPostRepository blogPostRepository;
+    public BlogPostController(BlogPostService blogPostService) {
+        this.blogPostService = blogPostService;
+    }
+//    @GetMapping(value = "/")
+//    public List<BlogPost> getBlogPost(){
+//        return blogPostService.getBlog();
+//    }
 
     @GetMapping(value = "/")
     public String index(BlogPost blogPost, Model model) {
@@ -33,9 +43,10 @@ public class BlogPostController {
 
     //mapping post requests
     @PostMapping(value = "/blogpost")
-    public String addNewBlogPost(BlogPost blogPost, Model model) {
+    public String createNewBlogPost(BlogPost blogPost, Model model) {
         //blogPost is our object we're getting from thymeleaf form
-        blogPostRepository.save(blogPost);
+        posts.add(blogPost);
+        blogPostService.addNewBlogPost(blogPost);
         model.addAttribute("title", blogPost.getTitle());
         model.addAttribute("author", blogPost.getAuthor());
         model.addAttribute("blogEntry", blogPost.getBlogEntry());
@@ -48,8 +59,8 @@ public class BlogPostController {
     }
 
     @RequestMapping(value = "/blogpost/{Id}", method = RequestMethod.DELETE)
-    public String deletePostWithId(@PathVariable Long id, BlogPost blogPost) {
-        blogPostRepository.deleteById(blogPost.getId());
+    public String deleteWithId(@PathVariable Long id, BlogPost blogPost) {
+        blogPostService.deleteById(blogPost.getId());
         return "blogpost/index";
     }
 }
