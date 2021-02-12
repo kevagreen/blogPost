@@ -45,8 +45,9 @@ public class BlogPostController {
     @PostMapping(value = "/blogpost")
     public String createNewBlogPost(BlogPost blogPost, Model model) {
         //blogPost is our object we're getting from thymeleaf form
-        posts.add(blogPost);
+        posts = blogPostService.getAllBlogs();
         blogPostService.addNewBlogPost(blogPost);
+        model.addAttribute("id", blogPost.getId());
         model.addAttribute("title", blogPost.getTitle());
         model.addAttribute("author", blogPost.getAuthor());
         model.addAttribute("blogEntry", blogPost.getBlogEntry());
@@ -58,10 +59,11 @@ public class BlogPostController {
         return "blogpost/createpost";
     }
 
-    @RequestMapping(value = "/blogpost/{Id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/blogpost/{id}", method = RequestMethod.DELETE)
     public String deleteWithId(@PathVariable Long id, BlogPost blogPost) {
         blogPostService.deleteById(blogPost.getId());
-        return "blogpost/index";
+        posts = blogPostService.getAllBlogs();
+        return "blogpost/delete";
     }
 }
 

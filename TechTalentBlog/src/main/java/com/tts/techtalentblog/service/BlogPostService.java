@@ -3,6 +3,7 @@ package com.tts.techtalentblog.service;
 import com.tts.techtalentblog.model.BlogPost;
 import com.tts.techtalentblog.repository.BlogPostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -10,7 +11,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional
 public class BlogPostService {
 
     private final BlogPostRepository blogPostRepository;
@@ -19,10 +19,12 @@ public class BlogPostService {
         this.blogPostRepository = blogPostRepository;
     }
 
-    public List<BlogPost> getBlog(){
-        return blogPostRepository.findAll();
+    public List<BlogPost> getAllBlogs(){
+        return (List<BlogPost>) blogPostRepository.findAll();
     }
     public void addNewBlogPost(BlogPost blogPost){
+        Optional<BlogPost> blogPostOptional = blogPostRepository
+        .findBlog(blogPost.getId());
         blogPostRepository.save(blogPost);
     }
     public void deleteById(Long id){

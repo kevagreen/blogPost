@@ -12,6 +12,6 @@ import java.util.Optional;
 //wrapper class, Long represent id
 @Repository
 public interface BlogPostRepository extends JpaRepository<BlogPost, Long> {
-    @Query("SELECT i FROM BlogPost i WHERE i.id = ?1")
-    public List<BlogPost> findBlog(Long id);
+    @Query(value = "SELECT i.* FROM BLOG_POST i WHERE i.id = ?1", nativeQuery = true)
+    Optional <BlogPost> findBlog(Long id);
 }

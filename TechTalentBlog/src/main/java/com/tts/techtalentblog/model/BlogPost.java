@@ -1,13 +1,11 @@
 package com.tts.techtalentblog.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 
 //table in database, entity aligns with our database
 @Entity
+@Table(name = "Blog_Post")
 public class BlogPost {
     //@Id identify primary key in database
     //@GeneratedValue allows system to generate values: in sequence or
@@ -16,13 +14,21 @@ public class BlogPost {
     private Long id;
     private String title;
     private String author;
-    private String blogEntry;
+    private String blog;
 
     public BlogPost(String title, String author, String blogEntry) {
         this.title = title;
         this.author = author;
-        this.blogEntry = blogEntry;
+        this.blog = blogEntry;
     }
+
+    public BlogPost(Long id, String title, String author, String blog) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.blog = blog;
+    }
+
     //default constructors are needed for @Entity, bean pick this up
     public BlogPost() {
     }
@@ -48,18 +54,18 @@ public class BlogPost {
     }
 
     public String getBlogEntry() {
-        return blogEntry;
+        return blog;
     }
 
-    public void setBlogEntry(String blogEntry) {
-        this.blogEntry = blogEntry;
+    public void setBlogEntry(String blog) {
+        this.blog = blog;
     }
 
     @Override
     public String toString() {
         return " Title: " +  title + '\r'+'\n' +
                 " Author: " + author + '\n' +
-                " Entry: " + blogEntry + "\n";
+                " Entry: " + blog + "\n";
     }
 
 
