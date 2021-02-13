@@ -2,17 +2,34 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.thymeleaf.org ">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link href="css/standard.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400&display=swap" rel="stylesheet">
     <title>Mom's Who Code Blog</title>
 </head>
 <body>
-<div id="title">
+<header>
+    <div>
+        <nav class="navbar navbar-light" style="background-color: coral;">
+        <ul class="nav-link active">
+            <li class="nav-item active">
+                <a class="nav-link active"  style="color:black;" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link active" style="color:black;" href="#"> Create Blog</a>
+            </li>
+        </ul>
+        </nav>
+    </div>
+</header>
+<div class="center-block">
+<div>
 <h1>Welcome to Mom's Who Code!</h1>
 <h4>Check Out Our Blogs!</h4>
+</div>
     <div class="container">
         <div class="row">
             <div th:each="blog:${posts}">
@@ -29,22 +46,24 @@
                             <!-- Link to Update -->
                             <!-- Link to Show  -->
                             <!--  Link to Destroy -->
-                            <form action="#" th:action="@{'/blogpost/{id}'(id=${blogPost.id})}" th:method="delete"
-                                  class="form-horizontal">
-                                <div class ="form-group">
-                                    <input type="hidden" name="_method" value="delete"/>
-                                    <button type="submit" class="btn btn-danger btn-block" th:text="Delete">Changed Your Mind? Delete Here</button>
-                                </div>
-                            </form>
+
 
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="center-block">
         <a th:href="@{/blogpost/new}">
-            <button class= "btn btn-primary" >Submit a New Blog Post</button>
+            <button  type="button" class="btn btn-outline-secondary" >Submit a New Blog Post</button>
         </a>
+        </div>
+    </div>
+</div>
+<div id="home-image">
+    <img src="images/womenintech.jpg" alt="mother working" class="responsive">
+    <div class="overlay">
+        <div class="text">Moms Who Code</div>
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>

@@ -35,17 +35,17 @@ public class BlogPostController {
     public String index(BlogPost blogPost, Model model) {
         //output generated via template
         //show desired data
+        posts = blogPostService.getAllBlogs();
         model.addAttribute("post ", posts);
         return "blogpost/index";
     }
-
     private BlogPost blogPost;
 
     //mapping post requests
     @PostMapping(value = "/blogpost")
     public String createNewBlogPost(BlogPost blogPost, Model model) {
         //blogPost is our object we're getting from thymeleaf form
-        posts = blogPostService.getAllBlogs();
+
         blogPostService.addNewBlogPost(blogPost);
         model.addAttribute("id", blogPost.getId());
         model.addAttribute("title", blogPost.getTitle());
